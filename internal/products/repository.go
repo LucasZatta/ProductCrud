@@ -9,7 +9,7 @@ import (
 func GetProductById(id string, db *sqlx.DB) (*Product, error) {
 	var product Product
 	fmt.Println(id)
-	queryStatement := `SELECT idProducts, name, price FROM Products WHERE idProducts = ?;`
+	queryStatement := `SELECT productId, name, price FROM Products WHERE productId = ?;`
 
 	err := db.Get(&product, queryStatement, id)
 
@@ -41,7 +41,7 @@ func CreateNewProduct(p *Product, db *sqlx.DB) (*int64, error) {
 }
 
 func DeleteProductById(id string, db *sqlx.DB) error {
-	queryStatement := `DELETE FROM Products WHERE (idProducts = ?);`
+	queryStatement := `DELETE FROM Products WHERE (productId = ?);`
 	_, err := db.Exec(queryStatement, id)
 
 	if err != nil {
@@ -53,7 +53,7 @@ func DeleteProductById(id string, db *sqlx.DB) error {
 }
 
 func UpdateProductById(id string, p *Product, db *sqlx.DB) (*int64, error) {
-	queryStatement := `UPDATE Products SET name = ?, price = ? WHERE (idProducts = ?);`
+	queryStatement := `UPDATE Products SET name = ?, price = ? WHERE (productId = ?);`
 	result, err := db.Exec(queryStatement, p.Name, p.Price, id)
 
 	if err != nil {

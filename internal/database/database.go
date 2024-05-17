@@ -34,7 +34,6 @@ func New() Service {
 	}
 
 	db, err := sqlx.Connect("mysql", fmt.Sprintf("%s:%s@tcp(%s:%s)/%s", username, password, host, port, dbname))
-	// db, err := sql.Open("mysql", fmt.Sprintf("%s:%s@tcp(%s:%s)/%s", username, password, host, port, dbname))
 	if err != nil {
 		log.Fatal(err)
 	}
